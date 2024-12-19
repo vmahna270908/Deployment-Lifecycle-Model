@@ -23,7 +23,7 @@ stages:
               backendAzureRmResourceGroupName: 'terraform-state-rg'
               backendAzureRmStorageAccountName: 'tfstatestoragecloud'
               backendAzureRmContainerName: 'tfstate'
-              backendAzureRmKey: 'dev.tfstate'
+              backendAzureRmKey: 'development.tfstate'
             displayName: 'Terraform Init'
           # Validate Terraform Code
           - script: |
