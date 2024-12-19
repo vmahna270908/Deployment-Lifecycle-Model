@@ -34,7 +34,7 @@ stages:
             inputs:
               provider: 'azurerm'
               command: 'plan'
-              commandOptions: '-var-file=$(Build.SourcesDirectory)/Environments/Development/dev.tfvars'
+              commandOptions: '-var-file=$(Build.SourcesDirectory)/Environments/Development/development.tfstate'
               environmentServiceNameAzureRM: 'ARM'
             displayName: 'Terraform Plan'
           - publish: $(Build.SourcesDirectory)/
