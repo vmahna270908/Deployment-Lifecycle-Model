@@ -5,3 +5,7 @@ variable "RG-Location" {
 variable "RG-Name" {
     type = string
 }
+
+variable "RG-Name" {
+    type = string
+}
