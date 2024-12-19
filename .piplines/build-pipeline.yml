@@ -1,0 +1,42 @@
+trigger:
+  branches:
+    include:
+      - dev
+pool:
+  vmImage: 'ubuntu-latest'
+stages:
+  - stage: Build
+    displayName: 'Terraform Build'
+    jobs:
+      - job: Terraform_Init_Validate
+        displayName: 'Terraform Init and Validate'
+        steps:
+          - task: ms-devlabs.custom-terraform-tasks.custom-terraform-installer-task.TerraformInstaller@1
+            inputs:
+              terraformVersion: 'latest'
+          # Initialize Terraform
+          - task: TerraformTaskV4@4
+            inputs:
+              provider: 'azurerm'
+              command: 'init'
+              backendServiceArm: 'ARM'
+              backendAzureRmResourceGroupName: 'Prod-RG'
+              backendAzureRmStorageAccountName: 'terraformstatefile2'
+              backendAzureRmContainerName: 'terraformstatefile'
+              backendAzureRmKey: 'dev.tfstate'
+            displayName: 'Terraform Init'
+          # Validate Terraform Code
+          - script: |
+              terraform validate
+            displayName: 'Terraform Validate'
+          # Package Terraform files (Create plan)
+          - task: TerraformTaskV4@4
+            inputs:
+              provider: 'azurerm'
+              command: 'plan'
+              commandOptions: '-var-file=$(Build.SourcesDirectory)/Environments/Development/dev.tfvars'
+              environmentServiceNameAzureRM: 'ARM'
+            displayName: 'Terraform Plan'
+          - publish: $(Build.SourcesDirectory)/
+            artifact: tfplan
+            displayName: 'Publish Plan Artifacttf_version'
