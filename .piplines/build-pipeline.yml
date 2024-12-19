@@ -20,9 +20,9 @@ stages:
               provider: 'azurerm'
               command: 'init'
               backendServiceArm: 'ARM'
-              backendAzureRmResourceGroupName: 'Prod-RG'
-              backendAzureRmStorageAccountName: 'terraformstatefile2'
-              backendAzureRmContainerName: 'terraformstatefile'
+              backendAzureRmResourceGroupName: 'terraform-state-rg'
+              backendAzureRmStorageAccountName: 'tfstatestoragecloud'
+              backendAzureRmContainerName: 'tfstate'
               backendAzureRmKey: 'dev.tfstate'
             displayName: 'Terraform Init'
           # Validate Terraform Code
