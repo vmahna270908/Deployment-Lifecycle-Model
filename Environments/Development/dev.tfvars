@@ -1,3 +1,3 @@
 #Dev Environment Variables
-RG-Name = "Dev-RG"
+RG-Name = "Development-RG"
 Environment-Name = "Dev"
