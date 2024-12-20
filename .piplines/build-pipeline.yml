@@ -25,7 +25,7 @@ stages:
               terraformVersion: 'latest'
           - script: |
               echo "Branch Name: $(Build.SourceBranchName)"
-              if [[ "$(Build.SourceBranchName)" == "refs/heads/dev" ]]; then
+              if [[ "$(Build.SourceBranchName)" == "dev" ]]; then
                 echo "Setting variables for Dev environment..."
                 echo "##vso[task.setvariable variable=terraformBackendFile]backend-dev.tfbackend"
                 echo "##vso[task.setvariable variable=terraformVarFile]dev.tfvars"
@@ -33,7 +33,7 @@ stages:
                 echo "Setting variables for Staging environment..."
                 echo "##vso[task.setvariable variable=terraformBackendFile]backend-staging.tfbackend"
                 echo "##vso[task.setvariable variable=terraformVarFile]staging.tfvars"
-              elif [[ "$(Build.SourceBranchName)" == "refs/heads/prod" ]]; then
+              elif [[ "$(Build.SourceBranchName)" == "refs/heads/main" ]]; then
                 echo "Setting variables for Production environment..."
                 echo "##vso[task.setvariable variable=terraformBackendFile]backend-prod.tfbackend"
                 echo "##vso[task.setvariable variable=terraformVarFile]prod.tfvars"
