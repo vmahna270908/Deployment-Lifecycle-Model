@@ -37,7 +37,7 @@ stages:
                 echo "Setting variables for Production environment..."
                 echo "##vso[task.setvariable variable=terraformBackendFile]backend-prod.tfbackend"
                 echo "##vso[task.setvariable variable=terraformVarFile]prod.tfvars"
-              4fi
+              fi
             displayName: "Set Variables for Environment"
           # Initialize Terraform
           - task: TerraformTaskV4@4
