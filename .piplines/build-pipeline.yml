@@ -2,8 +2,17 @@ trigger:
   branches:
     include:
       - dev
+      - staging
+      - main
+
 pool:
   vmImage: 'ubuntu-latest'
+
+variables:
+  # Set environment-specific backend files and variable files
+  terraformBackendFile: ''
+  terraformVarFile: ''
+
 stages:
   - stage: Build
     displayName: 'Terraform Build'
@@ -14,6 +23,22 @@ stages:
           - task: ms-devlabs.custom-terraform-tasks.custom-terraform-installer-task.TerraformInstaller@1
             inputs:
               terraformVersion: 'latest'
+          - script: |
+              echo "Branch Name: $(Build.SourceBranchName)"
+              if [[ "$(Build.SourceBranchName)" == "refs/heads/dev" ]]; then
+                echo "Setting variables for Dev environment..."
+                echo "##vso[task.setvariable variable=terraformBackendFile]backend-dev.tfbackend"
+                echo "##vso[task.setvariable variable=terraformVarFile]dev.tfvars"
+              elif [[ "$(Build.SourceBranchName)" == "refs/heads/staging" ]]; then
+                echo "Setting variables for Staging environment..."
+                echo "##vso[task.setvariable variable=terraformBackendFile]backend-staging.tfbackend"
+                echo "##vso[task.setvariable variable=terraformVarFile]staging.tfvars"
+              elif [[ "$(Build.SourceBranchName)" == "refs/heads/prod" ]]; then
+                echo "Setting variables for Production environment..."
+                echo "##vso[task.setvariable variable=terraformBackendFile]backend-prod.tfbackend"
+                echo "##vso[task.setvariable variable=terraformVarFile]prod.tfvars"
+              fi
+            displayName: "Set Variables for Environment"
           # Initialize Terraform
           - task: TerraformTaskV4@4
             inputs:
@@ -30,13 +55,10 @@ stages:
               terraform validate
             displayName: 'Terraform Validate'
           # Package Terraform files (Create plan)
-          - task: TerraformTaskV4@4
-            inputs:
-              provider: 'azurerm'
-              command: 'plan'
-              commandOptions: '-var-file=$(Build.SourcesDirectory)/Environments/Development/dev.tfvars'
-              environmentServiceNameAzureRM: 'ARM'
-            displayName: 'Terraform Plan'
+          - script: |
+              terraform plan -var-file=$(terraformVarFile) -out=tfplan
+            displayName: "Terraform Plan"
+            
           - publish: $(Build.SourcesDirectory)/
             artifact: tfplan
             displayName: 'Publish Plan Artifacttf_version'
