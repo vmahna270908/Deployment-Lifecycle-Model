@@ -49,7 +49,7 @@ stages:
               backendAzureRmStorageAccountName: 'tfstatestoragecloud'
               backendAzureRmContainerName: 'tfstate'
               backendAzureRmKey: 'development.tfstate'
-              commandOptions: 'backend-config=$(terraformBackendFile)'
+              commandOptions: 'backend-config="$(terraformBackendFile)"'
             displayName: 'Terraform Init'
           # Validate Terraform Code
           - script: |
