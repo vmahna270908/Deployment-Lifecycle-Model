@@ -27,15 +27,15 @@ stages:
               echo "Branch Name: $(Build.SourceBranchName)"
               if [[ "$(Build.SourceBranchName)" == "dev" ]]; then
                 echo "Setting variables for Dev environment..."
-                echo "##vso[task.setvariable variable=terraformBackendFile]backend-dev.tf"
+                echo "##vso[task.setvariable variable=terraformBackendFile]Environments/Development/backend-dev.tf"
                 echo "##vso[task.setvariable variable=terraformVarFile]Environments/Development/dev.tfvars"
               elif [[ "$(Build.SourceBranchName)" == "refs/heads/staging" ]]; then
                 echo "Setting variables for Staging environment..."
-                echo "##vso[task.setvariable variable=terraformBackendFile]backend-staging.tf"
+                echo "##vso[task.setvariable variable=terraformBackendFile]Environments/Staging/backend-staging.tf"
                 echo "##vso[task.setvariable variable=terraformVarFile]Environments/Staging/staging.tfvars"
               elif [[ "$(Build.SourceBranchName)" == "refs/heads/main" ]]; then
                 echo "Setting variables for Production environment..."
-                echo "##vso[task.setvariable variable=terraformBackendFile]backend-prod.tf"
+                echo "##vso[task.setvariable variable=terraformBackendFile]Environments/Production/backend-prod.tf"
                 echo "##vso[task.setvariable variable=terraformVarFile]Environments/Production/prod.tfvars"
               fi
             displayName: "Set Variables for Environment"
@@ -49,6 +49,7 @@ stages:
               backendAzureRmStorageAccountName: 'tfstatestoragecloud'
               backendAzureRmContainerName: 'tfstate'
               backendAzureRmKey: 'development.tfstate'
+              commandOptions: 'backend-config=$(terraformBackendFile)'
             displayName: 'Terraform Init'
           # Validate Terraform Code
           - script: |
