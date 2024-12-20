@@ -1,1 +1,1 @@
-RG-Name = "Prod-RG"
+RG-Name = "Production-RG"
