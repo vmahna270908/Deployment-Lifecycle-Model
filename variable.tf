@@ -5,3 +5,5 @@ variable "RG-Location" {
 variable "RG-Name" {
     type = string
 }
+
+##
