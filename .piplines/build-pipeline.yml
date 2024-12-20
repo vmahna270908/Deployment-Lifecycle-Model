@@ -55,7 +55,12 @@ stages:
               terraform validate
             displayName: 'Terraform Validate'
           # Package Terraform files (Create plan)
-          
+          - task: TerraformTaskV4@4
+            inputs:
+              provider: 'azurerm'
+              command: 'plan'
+              commandOptions: '-var-file=$(terraformVarFile)'
+              environmentServiceNameAzureRM: 'ARM'
 
           - publish: $(Build.SourcesDirectory)/
             artifact: tfplan
