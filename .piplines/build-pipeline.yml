@@ -7,6 +7,10 @@ trigger:
   paths:
      exclude:
       - /.git
+pr:
+  branches:
+    exclude:
+      - dev
 pool:
   vmImage: 'ubuntu-latest'
 
