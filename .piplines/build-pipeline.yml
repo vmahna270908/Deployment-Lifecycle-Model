@@ -2,6 +2,15 @@ trigger:
   branches:
     include:
       - dev
+    exclude:
+      - staging
+  paths:
+     exclude:
+      - /.git
+pr:
+  branches:
+    exclude:
+      - dev
 pool:
   vmImage: 'ubuntu-latest'
 
