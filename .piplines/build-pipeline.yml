@@ -4,6 +4,7 @@ trigger:
       - dev
     exclude:
       - refs/merge/*
+      - refs/pull/*
 pool:
   vmImage: 'ubuntu-latest'
 
