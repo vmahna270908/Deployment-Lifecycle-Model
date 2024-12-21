@@ -2,11 +2,7 @@ trigger:
   branches:
     include:
       - dev
-    exclude:
-      - refs/merge/*
-      - refs/pull/*
-      - staging
-      - main
+
 pool:
   vmImage: 'ubuntu-latest'
 
