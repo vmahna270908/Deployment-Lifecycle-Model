@@ -3,14 +3,7 @@ trigger:
     include:
       - dev
     exclude:
-      - staging
-  paths:
-     exclude:
-      - /.git
-pr:
-  branches:
-    exclude:
-      - dev
+      - refs/merge/*
 pool:
   vmImage: 'ubuntu-latest'
 
