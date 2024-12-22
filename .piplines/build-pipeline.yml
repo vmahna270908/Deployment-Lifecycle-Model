@@ -3,7 +3,6 @@ trigger:
     include:
       - dev
     exclude:
-      - -/.git
 pool:
   vmImage: 'ubuntu-latest'
 
