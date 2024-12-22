@@ -3,8 +3,6 @@ trigger:
     include:
       - dev
     exclude:
-      - merge/*
-      - pull/*
       - staging
       - main
 pool:
