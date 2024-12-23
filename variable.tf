@@ -5,3 +5,11 @@ variable "RG-Location" {
 variable "RG-Name" {
     type = string
 }
+
+variable "VN-Name" {
+    type = string
+}
+
+variable "VN-CIDR" {
+    type = list(string)
+}
