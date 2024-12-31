@@ -2,7 +2,6 @@ trigger:
   branches:
     include:
       - dev
-    exclude:
       - staging
       - main
 pool:
@@ -67,5 +66,5 @@ stages:
               environmentServiceNameAzureRM: 'ARM'
             displayName: 'Terraform Plan'
           - publish: $(Build.SourcesDirectory)/
-            artifact: tfplan
+            artifact: '$(terraformPlan)'
             displayName: 'Publish Plan Artifacttf_version'
