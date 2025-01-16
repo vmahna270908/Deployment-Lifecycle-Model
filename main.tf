@@ -4,7 +4,7 @@ resource "azurerm_resource_group" "AZ-RG" {
   location = var.RG-Location
 }
 
-##Creating a Virtual Network
+#Creating a Virtual Network
 
 resource "azurerm_virtual_network" "AZ-VN" {
   name = var.VN-Name
