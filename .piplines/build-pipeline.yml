@@ -2,8 +2,6 @@ trigger:
   branches:
     include:
       - dev
-      - staging
-      - main
 pool:
   vmImage: 'ubuntu-latest'
 
