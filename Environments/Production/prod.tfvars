@@ -1,3 +1,3 @@
 RG-Name = "Production-RG"
 VN-Name = "Production-VN"
-VN-CIDR = ["10.0.4.0/24"]
+VN-CIDR = ["192.168.3.0/24"]
