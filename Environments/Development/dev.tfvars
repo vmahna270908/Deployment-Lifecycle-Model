@@ -2,3 +2,9 @@
 RG-Name = "Development-RG"
 VN-Name = "Dev-VN"
 VN-CIDR = ["192.168.1.0/24"]
+SN1-Name = "Dev-SN1"
+SN1-CIDR = ["192.168.1.0/26"]
+VM1-Name = "Dev-VM1"
+VM1-NIC1 = "Dev-VM1-NIC1"
+VM1-username = "adminuser"
+VM1-password = "aM9E-/Z|U<2cp8n"
