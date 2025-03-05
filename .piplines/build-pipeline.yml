@@ -6,7 +6,7 @@ pool:
   vmImage: 'ubuntu-latest'
 
 variables:
-  # Set environment-specific backend files and variable files
+  # Setup environment-specific backend files and variable files
   terraformBackendFile: ''
   terraformVarFile: ''
   terraformPlan: ''
