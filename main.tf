@@ -19,7 +19,7 @@ resource "azurerm_subnet" "AZ-SN1" {
   virtual_network_name = azurerm_virtual_network.AZ-VN.name
   address_prefixes     = var.SN1-CIDR
 }
-
+/*
 resource "azurerm_network_interface" "VM1-NIC1" {
   name                = var.VM1-NIC1
   location            = azurerm_resource_group.AZ-RG.location
@@ -55,3 +55,4 @@ resource "azurerm_windows_virtual_machine" "VM1" {
     version   = "latest"
   }
 }
+*/
