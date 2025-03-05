@@ -1,3 +1,9 @@
 RG-Name = "Staging-RG"
 VN-Name = "Staging-VN"
-VN-CIDR = ["10.0.5.0/24"]
+VN-CIDR = ["192.168.2.0/24"]
+SN1-Name = "Stage-SN1"
+SN1-CIDR = ["192.168.2.0/26"]
+VM1-Name = "Stage-VM1"
+VM1-NIC1 = "Stage-VM1-NIC1"
+VM1-username = "adminuser"
+VM1-password = "ja2£{$1FHM;7LI>"
