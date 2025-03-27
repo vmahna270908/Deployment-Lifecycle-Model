@@ -66,3 +66,12 @@ stages:
           - publish: $(Build.SourcesDirectory)/
             artifact: '$(terraformPlan)'
             displayName: 'Publish Plan Artifacttf_version'
+            
+          # Sonar Cloud Code Analysis
+          - task: SonarCloudPrepare@3
+            inputs:
+              SonarQube: 'Sonar Cloud'
+              organization: 'vaibhavmahna270908'
+              scannerMode: 'dotnet'
+              projectKey: 'vaibhavmahna270908_azuredevopscodecheck'
+              projectName: 'AzureDevOpsCodeCheck'
