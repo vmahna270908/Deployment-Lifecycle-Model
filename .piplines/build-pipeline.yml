@@ -72,9 +72,7 @@ stages:
             inputs:
               SonarQube: 'Sonar Cloud'
               organization: 'vaibhavmahna270908'
-              scannerMode: 'dotnet'
-              projectKey: 'vaibhavmahna270908_azuredevopscodecheck'
-              projectName: 'AzureDevOpsCodeCheck'
+              scannerMode: 'other'
           - task: SonarCloudAnalyze@3
             inputs:
               jdkversion: 'JAVA_HOME_17_X64'
