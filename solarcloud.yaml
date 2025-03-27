@@ -1,27 +1,31 @@
 jobs:
-- job: BuildLinuxWithSonarCloud
-  displayName: Build for Linux\CMake With SonarCloud
-  pool:
-    vmImage: 'ubuntu-latest'
-  variables:
-    BUILD_WRAPPER_DOWNLOAD_URL: https://sonarcloud.io/static/cpp/build-wrapper-linux-x86.zip
-  steps:
-  - task: SonarCloudPrepare@1
-    inputs:
-      SonarCloud: 'SonarCloud' # Name of the SonarCloud service connection you created
-      organization: 'sonarsource-cfamily-examples'
-      scannerMode: 'CLI'
-      configMode: 'file'
-  - bash: |
-      mkdir -p $HOME/.sonar
-      curl -sSLo $HOME/.sonar/build-wrapper-linux-x86.zip ${{variables.BUILD_WRAPPER_DOWNLOAD_URL}}
-      unzip -o $HOME/.sonar/build-wrapper-linux-x86.zip -d $HOME/.sonar/
-    displayName: Download and install build wrapper
-  - bash: |
-      export PATH=$HOME/.sonar/build-wrapper-linux-x86:$PATH
-      autoreconf --install
-      ./configure
-      build-wrapper-linux-x86-64 --out-dir build_wrapper_output_directory make clean all
-    workingDirectory: .
-    displayName: Build in build-wrapper
-  - task: SonarCloudAnalyze@1
+  - job: BuildLinuxWithSonarCloud
+    displayName: Build for Linux\CMake With SonarQube Cloud
+    pool:
+      vmImage: "ubuntu-latest"
+    variables:
+      BUILD_WRAPPER_DOWNLOAD_URL: https://sonarcloud.io/static/cpp/build-wrapper-linux-x86.zip
+    steps:
+      - checkout: self
+        fetchDepth: 0
+
+      - task: SonarCloudPrepare@2
+        inputs:
+          SonarCloud: "Sonar Cloud"
+          organization: "vaibhavmahna270908"
+          scannerMode: "CLI"
+          configMode: "file"
+          extraProperties: |
+            sonar.cfamily.compile-commands=build_wrapper_output_directory/compile_commands.json
+
+      - bash: |
+          mkdir -p $HOME/.sonar
+          curl -sSLo $HOME/.sonar/build-wrapper-linux-x86.zip ${{variables.BUILD_WRAPPER_DOWNLOAD_URL}}
+          unzip -o $HOME/.sonar/build-wrapper-linux-x86.zip -d $HOME/.sonar/
+        displayName: Download and install build wrapper
+      - bash: |
+          export PATH=$HOME/.sonar/build-wrapper-linux-x86:$PATH
+          build-wrapper-linux-x86-64 --out-dir build_wrapper_output_directory <insert_your_clean_build_command>
+        workingDirectory: .
+        displayName: Build in build-wrapper
+      - task: SonarCloudAnalyze@2
