@@ -75,3 +75,10 @@ stages:
               scannerMode: 'dotnet'
               projectKey: 'vaibhavmahna270908_azuredevopscodecheck'
               projectName: 'AzureDevOpsCodeCheck'
+          - task: SonarCloudAnalyze@3
+            inputs:
+              jdkversion: 'JAVA_HOME_17_X64'
+          
+          - task: SonarCloudPublish@3
+            inputs:
+              pollingTimeoutSec: '100'
