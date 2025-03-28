@@ -80,3 +80,11 @@ stages:
           - task: SonarCloudPublish@3
             inputs:
               pollingTimeoutSec: '100'
+          - task: SonarCloudPrepare@3
+            inputs:
+              SonarQube: 'Sonar Cloud'
+              organization: 'vaibhavmahna270908'
+              scannerMode: 'other'
+          - task: SonarCloudPublish@3
+            inputs:
+              pollingTimeoutSec: '100'
