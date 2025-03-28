@@ -2,6 +2,7 @@ trigger:
   branches:
     include:
       - dev
+      
 pool:
   vmImage: 'ubuntu-latest'
 
@@ -72,8 +73,13 @@ stages:
             inputs:
               SonarQube: 'Sonar Cloud'
               organization: 'vaibhavmahna270908'
-              scannerMode: 'cli'
-              configMode: 'file'
+              scannerMode: 'other'
+              extraProperties: |
+                # Additional properties that will be passed to the scanner,
+                # Put one key=value per line, example:
+                # sonar.exclusions=**/*.bin
+                sonar.projectKey=vaibhavmahna270908_azuredevopscodecheck
+                sonar.projectName=AzureDevOpsCodeCheck
           - task: SonarCloudAnalyze@3
             inputs:
               jdkversion: 'JAVA_HOME_17_X64'
