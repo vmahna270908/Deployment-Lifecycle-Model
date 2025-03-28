@@ -72,19 +72,11 @@ stages:
             inputs:
               SonarQube: 'Sonar Cloud'
               organization: 'vaibhavmahna270908'
-              scannerMode: 'other'
+              scannerMode: 'cli'
+              configMode: 'file'
           - task: SonarCloudAnalyze@3
             inputs:
               jdkversion: 'JAVA_HOME_17_X64'
-          
-          - task: SonarCloudPublish@3
-            inputs:
-              pollingTimeoutSec: '100'
-          - task: SonarCloudPrepare@3
-            inputs:
-              SonarQube: 'Sonar Cloud'
-              organization: 'vaibhavmahna270908'
-              scannerMode: 'other'
           - task: SonarCloudPublish@3
             inputs:
               pollingTimeoutSec: '100'
