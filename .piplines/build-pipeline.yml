@@ -41,6 +41,20 @@ stages:
                 echo "##vso[task.setvariable variable=terraformVarFile]Environments/Production/prod.tfvars"
               fi
             displayName: "Set Variables for Environment"
+          - task: SonarCloudPrepare@3
+            inputs:
+              SonarQube: 'Sonar Cloud'
+              organization: 'vaibhavmahna270908'
+              scannerMode: 'other'
+              extraProperties: |
+                # Additional properties that will be passed to the scanner,
+                # Put one key=value per line, example:
+                # sonar.exclusions=**/*.bin
+                sonar.projectKey=vaibhavmahna270908_azuredevopscodecheck
+                sonar.projectName=AzureDevOpsCodeCheck
+          - task: SonarCloudAnalyze@3
+            inputs:
+              jdkversion: 'JAVA_HOME_17_X64'
           # Initialize Terraform
           - task: TerraformTaskV4@4
             inputs:
@@ -68,21 +82,4 @@ stages:
             artifact: '$(terraformPlan)'
             displayName: 'Publish Plan Artifacttf_version'
             
-          # Sonar Cloud Code Analysis
-          - task: SonarCloudPrepare@3
-            inputs:
-              SonarQube: 'Sonar Cloud'
-              organization: 'vaibhavmahna270908'
-              scannerMode: 'other'
-              extraProperties: |
-                # Additional properties that will be passed to the scanner,
-                # Put one key=value per line, example:
-                # sonar.exclusions=**/*.bin
-                sonar.projectKey=vaibhavmahna270908_azuredevopscodecheck
-                sonar.projectName=AzureDevOpsCodeCheck
-          - task: SonarCloudAnalyze@3
-            inputs:
-              jdkversion: 'JAVA_HOME_17_X64'
-          - task: SonarCloudPublish@3
-            inputs:
-              pollingTimeoutSec: '100'
+          
