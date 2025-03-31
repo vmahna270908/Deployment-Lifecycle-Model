@@ -76,7 +76,6 @@ stages:
           - publish: $(Build.SourcesDirectory)/
             artifact: '$(terraformPlan)'
             displayName: 'Publish Plan Artifacttf_version'
-          
           - task: SonarCloudAnalyze@3
             inputs:
               jdkversion: 'JAVA_HOME_17_X64'
