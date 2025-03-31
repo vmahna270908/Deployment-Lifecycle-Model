@@ -28,6 +28,10 @@ stages:
               cliProjectKey: 'vaibhavmahna270908_deployment-lifecycle-model-code-analysis'
               cliProjectName: 'Deployment-Lifecycle-Model-Code-Analysis'
               cliSources: '.'
+
+          - task: SonarCloudPublish@3
+            inputs:
+              pollingTimeoutSec: '100'
           - task: ms-devlabs.custom-terraform-tasks.custom-terraform-installer-task.TerraformInstaller@1
             inputs:
               terraformVersion: 'latest'
