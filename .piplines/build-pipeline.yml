@@ -19,6 +19,15 @@ stages:
       - job: Terraform_Init_Validate
         displayName: 'Terraform Init and Validate'
         steps:
+          - task: SonarCloudPrepare@3
+            inputs:
+              SonarQube: 'Sonar Cloud'
+              organization: 'vaibhavmahna270908'
+              scannerMode: 'cli'
+              configMode: 'manual'
+              cliProjectKey: 'vaibhavmahna270908_deployment-lifecycle-model-code-analysis'
+              cliProjectName: 'Deployment-Lifecycle-Model-Code-Analysis'
+              cliSources: '.'
           - task: ms-devlabs.custom-terraform-tasks.custom-terraform-installer-task.TerraformInstaller@1
             inputs:
               terraformVersion: 'latest'
